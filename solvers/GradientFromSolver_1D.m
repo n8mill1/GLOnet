@@ -1,7 +1,6 @@
-function [ Gr, effabs ] = GradientFromSolver_1D( img, wavelength, desired_angle)
+function [ Gr, effabs ] = GradientFromSolver_1D(img, wavelength, desired_angle)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes he
-
 
 img = img/2.0 + 0.5;
 
@@ -14,7 +13,6 @@ n_in = 1;
 load('p_Si.mat');
 n_Si = interp1(WL,n,wavelength);
 
- 
 
 layers = 1;
 z_step = min(wavelength)/40; % z step for z discritization
@@ -25,7 +23,6 @@ desired_angle = desired_angle; % deg, in air
 
 pol = {'TM'};
 period = wavelength/(sind(desired_angle));
-
 
 % forward simulation
 k_par_f = sind(incident_angle)*n_sub; % incident moment
@@ -38,6 +35,7 @@ if strcmp(pol,'TE')
 elseif strcmp(pol,'TM')
     parm = res0(-1);
 end
+
 parm.res1.champ = 1;
 num_z_disc = round(thickness/z_step);
 parm.res3.npts = [0,num_z_disc, 0];
@@ -49,20 +47,19 @@ textures{2} = {n_sub};
 
 nlength = length(img);
 dx = period/nlength;
-xvec = [1:nlength]*dx - 0.5*period;
-nvec = img*(n_Si - n_in) + n_in;
+xvec = ([1:nlength] * dx) - (0.5 * period);
+nvec = img * (n_Si - n_in) + n_in;
 
 textures{3} = {xvec,nvec};
 
-
 % define profile
 profile = {[0,thickness,0],[1,3,2]};
-
 
 parm.res3.sens = -1;
 parm.res1.champ = 1;
 aa = res1(wavelength,period,textures,nn,k_par_f,parm);
 result1 = res2(aa,profile);
+
 [et,z,index] = res3(xvec,aa,profile,1,parm);
 
 % Getting transmitted orders and efficiencies
@@ -71,7 +68,6 @@ tgtcur = 1;
 [thetadiff,ind_target] = min(abs(tr.order-tgtcur));
 effabs = tr.efficiency(ind_target);            % to save
 
-            
 % backward
 k_par_r = -tr.K(ind_target,1);
 aa = res1(wavelength,period,textures,nn,k_par_r,parm);
@@ -83,9 +79,7 @@ parm.res3.sens = 1;
 
 %     FOM gradient
 
-
 stp = 0.07;
-
 
 if strcmp(pol,'TE')
     [er,z,index] = res3(xvec,aa,profile,exp(1i*angle(conj(tr.E(ind_target,2)))),parm);
@@ -117,8 +111,6 @@ grtot = grtot/max(abs(grtot));
 %grtot = grtot/max(max(abs(grtot)));
 %grtot = stp*grtot;
 
-
-Gr = grtot*2.0;    
+Gr = grtot*2.0;
 
 end
-

@@ -103,7 +103,7 @@ def train(generator, optimizer, scheduler, eng, params, pca=None):
             # sample  z
             z = sample_z(params.batch_size, params)
 
-            # generate a batch of iamges
+            # generate a batch of images
             gen_imgs = generator(z, params)
 
 

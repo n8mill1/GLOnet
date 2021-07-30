@@ -11,8 +11,9 @@ import torch
 
 # start matlab engine
 eng = matlab.engine.start_matlab()
+
 # RCWA path
-eng.addpath(eng.genpath('/home/users/jiangjq/Desktop/reticolo_allege'));
+eng.addpath(eng.genpath('C:/Users/n8mil/Documents/GitHub/Photonic-Inverse-Design/GLOnet/RETICOLO V9/V9/reticolo_allege_v9'));
 eng.addpath(eng.genpath('solvers'));
 
 
@@ -88,7 +89,3 @@ if __name__ == '__main__':
     # Generate images and save 
     logging.info('Start generating devices')
     evaluate(generator, eng, numImgs=500, params=params)
-
-
-
-

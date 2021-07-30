@@ -1,0 +1,7 @@
+"Conditional GLOnets can apply to the design of other classes of photonic devices and more broadly to other physical systems in which device performance can be improved using gradients."
+
+"We are also interested in applying our algorithm to more complex systems, such as 2D or 3D metasurfaces, multi-function metasurfaces, and other photonics design problems."
+
+"New concepts that intimately combine the underlying physical structure of Maxwell’s equations with machine learning need to be developed. GLOnets, which combine machine learning with physics-based solvers, is one such example showing how new hybrid algorithms can enhance the capabilities of neural networks."
+
+"We predict that dataless training, in which physics-based calculations are used to train neural networks, will serve as a particularly effective and computationally efficient means to harnessing machine learning for photonics problems."

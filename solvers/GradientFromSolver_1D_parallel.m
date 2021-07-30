@@ -10,7 +10,7 @@ parfor n = 1:N
 	wavelength = wavelengths(n);
 	desired_angle = desired_angles(n);
 	img = imgs(n, :);
-	[Grs(n, :), Effs(n)]  = GradientFromSolver_1D(img, wavelength, desired_angle);
+	[Grs(n, :), Effs(n)] = GradientFromSolver_1D(img, wavelength, desired_angle);
 end
 toc
 
